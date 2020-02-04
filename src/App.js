@@ -1,24 +1,22 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Navbar from './components/Navbar';
+import NewsCard from './components/NewsCard';
+import AppProvider from './context/AppProvider';
+import { Switch, Route } from 'react-router-dom';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <AppProvider>
+        <Navbar />
+        <Switch>
+          <Route exact path='/' component={()=><NewsCard path="realTime" />} />
+          <Route exact path='/trendings' component={()=><NewsCard path="trendings" />} />
+          <Route exact path='/trendings-by-email' component={()=><NewsCard path="trendingsByEmail" />} />
+          <Route path='/search-result' component={()=><NewsCard path="searchResult" />} />
+        </Switch>
+      </AppProvider>
     </div>
   );
 }
